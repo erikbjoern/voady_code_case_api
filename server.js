@@ -1,21 +1,29 @@
 const express = require('express')
 const graphql = require('graphql')
 const { graphqlHTTP } = require('express-graphql')
+const models = require('./models')
 
 const schema = graphql.buildSchema(`
   type Query {
-    products: [String]
+    products: [Product]
+  }
+
+  type Product {
+    id: Int,
+    name: String,
+    brand: String,
+    volume: Int,
+    purchase_price: Float,
+    selling_price: Float
   }
 `)
 
-const products = [
-  "Gel",
-  "Conditioner",
-  "Schampoo"
-]
+const getProducts = async () => (
+  await models.Product.findAll()
+)
 
 const root = {
-  products: products
+  products: getProducts()
 }
 
 const app = express()

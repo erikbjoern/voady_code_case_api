@@ -9,7 +9,9 @@ module.exports = {
         brand: "Living Proof",
         volume: 225,
         purchase_price: 15,
-        selling_price: 27.99
+        selling_price: 27.99,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         id: 1230914,
@@ -17,7 +19,9 @@ module.exports = {
         brand: "Kérastase",
         volume: 200,
         purchase_price: 16,
-        selling_price: 29.99
+        selling_price: 29.99,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         id: 132342,
@@ -25,7 +29,9 @@ module.exports = {
         brand: "IGK",
         volume: 150,
         purchase_price: 15,
-        selling_price: 27.99
+        selling_price: 27.99,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ], {});
   },

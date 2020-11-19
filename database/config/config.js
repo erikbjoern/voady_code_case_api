@@ -1,16 +1,18 @@
-require('dotenv').config()
-
 module.exports = {
-  development: {
-    url: process.env.DEV_DATABASE_URL,
-    dialect: "postgres"
+  "development": {
+    "username": "postgres",
+    "password": null,
+    "database": "voady_code_case_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "logging": false
   },
-  test: {
-    url: process.env.TEST_DATABASE_URL,
-    dialect: "postgres"
-  },
-  production: {
-    url: process.env.DATABASE_URL,
-    dialect: "postgres"
+  "test": {
+    "username": "postgres",
+    "password": null,
+    "database": "voady_code_case_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "logging": false
   }
 }
