@@ -6,6 +6,7 @@ const schema = graphql.buildSchema(`
     name: String,
     brand: String,
     volume: Int,
+    balance: Int!,
     purchase_price: Float,
     selling_price: Float
   }
@@ -25,6 +26,7 @@ const schema = graphql.buildSchema(`
     volume: Int,
     purchase_price: Float,
     selling_price: Float
+    balance: Int,
   }
 `);
 

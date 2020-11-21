@@ -10,6 +10,7 @@ module.exports = {
         volume: 225,
         purchase_price: 15,
         selling_price: 27.99,
+        balance: 100,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -20,6 +21,7 @@ module.exports = {
         volume: 200,
         purchase_price: 16,
         selling_price: 29.99,
+        balance: 200,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -30,6 +32,7 @@ module.exports = {
         volume: 150,
         purchase_price: 15,
         selling_price: 27.99,
+        balance: 300,
         createdAt: new Date(),
         updatedAt: new Date(),
       }
