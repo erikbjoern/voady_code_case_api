@@ -2,7 +2,7 @@ const graphql = require('graphql');
 
 const schema = graphql.buildSchema(`
   input ProductInput {
-    id: Int,
+    id: Int!,
     name: String,
     brand: String,
     volume: Int,
