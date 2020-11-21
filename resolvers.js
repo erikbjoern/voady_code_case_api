@@ -56,15 +56,33 @@ const resolve = {
 
       return editedProducts;
     },
-    deleteProduct: async ({ input }) => {
-      const productToDelete = await models.Product.findOne({where: { id: input.id}})
-      if (!productToDelete) {
-        throw new Error (`Could not find product with id ${input.id}`)
+    deleteProducts: async ({ input }) => {
+      const deletedProducts = [];
+      const unfoundProducts = [];
+      const productIds = input.products.map((product => product.id))
+
+      for (id of productIds) {
+        const productToDelete = await models.Product.findOne({where: { id: id}})
+        if (!productToDelete) {
+          unfoundProducts.push(id)
+          continue
+        }
+        
+        models.Product.destroy({ where: { id: id }})
+        deletedProducts.push({ id: id })
+      }
+      
+      if (unfoundProducts.length > 0) {
+        const deletedConfirmation = deletedProducts.length > 0
+          ? ` All other products were successfully deleted.` 
+          : ""
+
+        throw new Error (
+          `Could not find product(s) with id ${unfoundProducts.join(", ")}.` + deletedConfirmation
+        )
       }
 
-      models.Product.destroy({ where: { id: input.id }})
-
-      return { id: input.id }
+      return deletedProducts
     }
   };
 
