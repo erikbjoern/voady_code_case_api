@@ -33,7 +33,13 @@ const resolve = {
       }
       
       if (erronousIds.length > 0) {
-        throw new Error(`Can't find product with id ${erronousIds.join(", ")}`);
+        const error = `Couldn't find product with id ${erronousIds.join(", ")}.`
+        const editedProductsIds = editedProducts.map(product => product.id)
+        const confirmation = editedProductsIds.length > 0
+          ? ` Product(s) with id ${editedProductsIds.join(", ")} were successfully updated` 
+          : ""
+
+        throw new Error(error + confirmation);
       }
 
       return editedProducts;
