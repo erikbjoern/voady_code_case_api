@@ -6,7 +6,8 @@ const bodyParser = require('body-parser')
 
 const root = {
   products: resolve.getProducts,
-  addProduct: resolve.addProduct
+  addProduct: resolve.addProduct,
+  editBalance: resolve.editBalance,
 }
 
 const app = express()

@@ -12,6 +12,16 @@ const resolve = {
       console.log(error)
       throw new Error (`${error.message} on '${Object.entries(error.fields)[0]}': ${error.original.message}`)
     }
+  },
+  editBalance: async ({ input }) => {
+    try {
+      const product = await models.Product.findOne({ where: {id: input.id}})
+      product.update({ balance: input.balance })
+      return product
+    } catch (error) {
+      console.log(error)
+      throw new Error (`Can't find product with id ${input.id}`)
+    }
   }
 }
 
