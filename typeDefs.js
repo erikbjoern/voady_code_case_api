@@ -1,6 +1,6 @@
-const graphql = require("graphql");
+const { gql } = require('apollo-server-express')
 
-const schema = graphql.buildSchema(`
+const typeDefs = gql`
   input ProductInput {
     id: Int!
     name: String
@@ -29,13 +29,22 @@ const schema = graphql.buildSchema(`
   }
 
   type Query {
-    products: [Product]
+    getProducts: [Product]
+  }
+  
+  type AuthPayload {
+    user: User
+  }
+
+  type User {
+    email: String
   }
 
   type Mutation {
     addProduct(input: ProductInput): Product
     editProductsBalance(input: EditProductsBalanceInput): [Product]
     deleteProducts(input: DeleteProductsInput): [ProductId]
+    login(email: String!, password: String!): AuthPayload
   }
 
   type Product {
@@ -51,6 +60,6 @@ const schema = graphql.buildSchema(`
   type ProductId {
     id: Int
   }
-`);
+`;
 
-module.exports = schema;
+module.exports = typeDefs;
