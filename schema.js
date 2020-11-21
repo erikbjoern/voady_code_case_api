@@ -12,6 +12,10 @@ const schema = graphql.buildSchema(`
   }
 
   input EditBalanceInput {
+    products: [BalanceInput]
+  }
+
+  input BalanceInput {
     id: Int!
     balance: Int!
   }
@@ -22,7 +26,7 @@ const schema = graphql.buildSchema(`
 
   type Mutation {
     addProduct(input: ProductInput): Product
-    editBalance(input: EditBalanceInput): Product
+    editBalance(input: EditBalanceInput): [Product]
   }
 
   type Product {

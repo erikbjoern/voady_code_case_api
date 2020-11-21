@@ -1,28 +1,43 @@
-const models = require('./models')
+const models = require("./models");
 
 const resolve = {
-  getProducts: async () => (
-    await models.Product.findAll()
-  ),
+  getProducts: async () => await models.Product.findAll(),
   addProduct: async ({ input }) => {
     try {
-      const newProduct = await models.Product.create(input)
-      return newProduct
+      const newProduct = await models.Product.create(input);
+      return newProduct;
     } catch (error) {
-      console.log(error)
-      throw new Error (`${error.message} on '${Object.entries(error.fields)[0]}': ${error.original.message}`)
+      console.log(error);
+      throw new Error(
+        `${error.message} on '${Object.entries(error.fields)[0]}': ${
+          error.original.message
+        }`
+      );
     }
   },
   editBalance: async ({ input }) => {
-    try {
-      const product = await models.Product.findOne({ where: {id: input.id}})
-      product.update({ balance: input.balance })
-      return product
-    } catch (error) {
-      console.log(error)
-      throw new Error (`Can't find product with id ${input.id}`)
-    }
-  }
-}
+      const erronousIds = [];
+      const editedProducts = [];
+      
+      for (product of input.products) {
+        const productToEdit = await models.Product.findOne({
+          where: { id: product.id },
+        });
+
+        if (productToEdit) {
+          productToEdit.update({ balance: product.balance });
+          editedProducts.push(productToEdit);
+        } else {
+          erronousIds.push(product.id)
+        }
+      }
+      
+      if (erronousIds.length > 0) {
+        throw new Error(`Can't find product with id ${erronousIds.join(", ")}`);
+      }
+
+      return editedProducts;
+    },
+  };
 
 module.exports = resolve;
