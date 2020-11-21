@@ -1,6 +1,6 @@
 const models = require("../models");
 
-const deleteProducts = async ({ input }) => {
+const deleteProducts = async (parent, { input }, context) => {
   const deletedProducts = [];
   const unfoundProducts = [];
   const productIds = input.products.map((product => product.id))

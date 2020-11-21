@@ -1,6 +1,6 @@
 const models = require("../models");
 
-const addProduct = async ({ input }) => {
+const addProduct = async (parent, { input }, context) => {
   try {
     const newProduct = await models.Product.create(input);
     return newProduct;

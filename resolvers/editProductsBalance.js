@@ -1,6 +1,6 @@
 const models = require("../models");
 
-const editProductsBalance = async ({ input }) => {
+const editProductsBalance = async (parent, { input }, context) => {
   const unfoundIds = [];
   const erroneousBalanceIds = [];
   const editedProducts = [];
