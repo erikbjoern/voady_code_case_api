@@ -56,6 +56,16 @@ const resolve = {
 
       return editedProducts;
     },
+    deleteProduct: async ({ input }) => {
+      const productToDelete = await models.Product.findOne({where: { id: input.id}})
+      if (!productToDelete) {
+        throw new Error (`Could not find product with id ${input.id}`)
+      }
+
+      models.Product.destroy({ where: { id: input.id }})
+
+      return { id: input.id }
+    }
   };
 
 module.exports = resolve;

@@ -20,6 +20,10 @@ const schema = graphql.buildSchema(`
     balance: Int!
   }
 
+  input DeleteProduct {
+    id: Int!
+  }
+
   type Query {
     products: [Product]
   }
@@ -27,6 +31,7 @@ const schema = graphql.buildSchema(`
   type Mutation {
     addProduct(input: ProductInput): Product
     editProductBalance(input: EditProductBalanceInput): [Product]
+    deleteProduct(input: DeleteProduct): ProductId
   }
 
   type Product {
@@ -37,6 +42,10 @@ const schema = graphql.buildSchema(`
     purchase_price: Float
     selling_price: Float
     balance: Int
+  }
+
+  type ProductId {
+    id: Int
   }
 `);
 

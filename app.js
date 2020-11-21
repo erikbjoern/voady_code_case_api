@@ -8,6 +8,7 @@ const root = {
   products: resolve.getProducts,
   addProduct: resolve.addProduct,
   editProductBalance: resolve.editProductBalance,
+  deleteProduct: resolve.deleteProduct
 }
 
 const app = express()
