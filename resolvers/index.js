@@ -7,7 +7,7 @@ const logout = require("./logout");
 
 const resolvers = {
   Query: {
-    getProducts,
+    products: getProducts,
   },
   Mutation: {
     addProduct,

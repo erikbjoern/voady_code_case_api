@@ -1,6 +1,23 @@
 const { gql } = require('apollo-server-express')
 
 const typeDefs = gql`
+  input BalanceInput {
+    id: Int!
+    balance: Int!
+  }
+
+  input DeleteInput {
+    id: Int!
+  }
+
+  input DeleteProductsInput {
+    products: [DeleteInput]
+  }
+
+  input EditProductsBalanceInput {
+    products: [BalanceInput]
+  }
+
   input ProductInput {
     id: Int!
     name: String
@@ -10,44 +27,9 @@ const typeDefs = gql`
     purchase_price: Float
     selling_price: Float
   }
-
-  input EditProductsBalanceInput {
-    products: [BalanceInput]
-  }
-
-  input BalanceInput {
-    id: Int!
-    balance: Int!
-  }
-
-  input DeleteProductsInput {
-    products: [DeleteInput]
-  }
-
-  input DeleteInput {
-    id: Int!
-  }
-
-  type Query {
-    getProducts: [Product]
-  }
   
   type AuthPayload {
     user: User
-  }
-
-  type User {
-    firstName: String
-    lastName: String
-    email: String
-  }
-
-  type Mutation {
-    addProduct(input: ProductInput): Product
-    editProductsBalance(input: EditProductsBalanceInput): [Product]
-    deleteProducts(input: DeleteProductsInput): [ProductId]
-    login(email: String!, password: String!): AuthPayload
-    logout(email: String!): AuthPayload
   }
 
   type Product {
@@ -62,6 +44,24 @@ const typeDefs = gql`
 
   type ProductId {
     id: Int
+  }
+
+  type User {
+    firstName: String
+    lastName: String
+    email: String
+  }
+
+  type Query {
+    products: [Product]
+  }
+  
+  type Mutation {
+    addProduct(input: ProductInput): Product
+    editProductsBalance(input: EditProductsBalanceInput): [Product]
+    deleteProducts(input: DeleteProductsInput): [ProductId]
+    login(email: String!, password: String!): AuthPayload
+    logout(email: String!): AuthPayload
   }
 `;
 
