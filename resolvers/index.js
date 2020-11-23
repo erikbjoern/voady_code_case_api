@@ -3,6 +3,7 @@ const deleteProducts = require("./deleteProducts");
 const editProductsBalance = require("./editProductsBalance");
 const getProducts = require("./getProducts");
 const login = require("./login");
+const logout = require("./logout");
 
 const resolvers = {
   Query: {
@@ -13,6 +14,7 @@ const resolvers = {
     deleteProducts,
     editProductsBalance,
     login,
+    logout,
   }
 };
 

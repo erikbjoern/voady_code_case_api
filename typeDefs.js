@@ -47,6 +47,7 @@ const typeDefs = gql`
     editProductsBalance(input: EditProductsBalanceInput): [Product]
     deleteProducts(input: DeleteProductsInput): [ProductId]
     login(email: String!, password: String!): AuthPayload
+    logout(email: String!): AuthPayload
   }
 
   type Product {
