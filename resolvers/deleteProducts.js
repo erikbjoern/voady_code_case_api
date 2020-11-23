@@ -1,7 +1,7 @@
 const models = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 
-const deleteProducts = async (parent, { input }, context) => {
+const deleteProducts = async (parent, { products }, context) => {
   if (!context.isAuthenticated()) {
     throw new AuthenticationError(
       "You need to be logged in to perform this action"
@@ -10,7 +10,7 @@ const deleteProducts = async (parent, { input }, context) => {
   
   const deletedProducts = [];
   const unfoundProducts = [];
-  const productIds = input.products.map((product => product.id))
+  const productIds = products.map(product => product.id)
 
   for (id of productIds) {
     const productToDelete = await models.Product.findOne({where: { id: id}})

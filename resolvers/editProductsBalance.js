@@ -1,7 +1,7 @@
 const models = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 
-const editProductsBalance = async (parent, { input }, context) => {
+const editProductsBalance = async (parent, { products }, context) => {
   if (!context.isAuthenticated()) {
     throw new AuthenticationError(
       "You need to be logged in to perform this action"
@@ -12,7 +12,7 @@ const editProductsBalance = async (parent, { input }, context) => {
   const erroneousBalanceIds = [];
   const editedProducts = [];
   
-  for (product of input.products) {
+  for (product of products) {
     if (product.balance < 0) {
       erroneousBalanceIds.push(product.id)
       continue

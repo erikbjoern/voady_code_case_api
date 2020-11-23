@@ -1,21 +1,13 @@
 const { gql } = require('apollo-server-express')
 
 const typeDefs = gql`
-  input BalanceInput {
+  input EditBalanceInput {
     id: Int!
     balance: Int!
   }
 
   input DeleteInput {
     id: Int!
-  }
-
-  input DeleteProductsInput {
-    products: [DeleteInput]
-  }
-
-  input EditProductsBalanceInput {
-    products: [BalanceInput]
   }
 
   input ProductInput {
@@ -57,9 +49,9 @@ const typeDefs = gql`
   }
   
   type Mutation {
-    addProduct(input: ProductInput): Product
-    editProductsBalance(input: EditProductsBalanceInput): [Product]
-    deleteProducts(input: DeleteProductsInput): [ProductId]
+    addProduct(product: ProductInput): Product
+    editProductsBalance(products: [EditBalanceInput]): [Product]
+    deleteProducts(products: [DeleteInput]): [ProductId]
     login(email: String!, password: String!): AuthPayload
     logout(email: String!): AuthPayload
   }
