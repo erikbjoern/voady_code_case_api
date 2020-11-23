@@ -1,8 +1,15 @@
 const models = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
 
-const addProduct = async ({ input }) => {
+const addProduct = async (parent, { product }, context) => {
+  if (!context.isAuthenticated()) {
+    throw new AuthenticationError(
+      "You need to be logged in to perform this action"
+    );
+  }
+
   try {
-    const newProduct = await models.Product.create(input);
+    const newProduct = await models.Product.create(product);
     return newProduct;
   } catch (error) {
     console.log(error);
@@ -12,6 +19,6 @@ const addProduct = async ({ input }) => {
       }`
     );
   }
-}
+};
 
 module.exports = addProduct;
