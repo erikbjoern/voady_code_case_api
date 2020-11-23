@@ -4,6 +4,7 @@ const models = require("./models");
 const passport = require("passport");
 const resolvers = require("./resolvers");
 const typeDefs = require("./typeDefs");
+const session = require('express-session');
 const { ApolloServer } = require("apollo-server-express");
 const { GraphQLLocalStrategy, buildContext } = require('graphql-passport')
 
@@ -17,18 +18,23 @@ passport.deserializeUser(function(user, done) {
 
 passport.use(
   new GraphQLLocalStrategy(async (email, password, done) => {
-    const users = await models.User.findAll();
-    const matchingUser = users.find(user => email === user.email && password === user.password);
-    const error = matchingUser ? null : new Error('no matching user');
+    const matchingUser = await models.User.findOne({ where: { email, password } });
+    const error = matchingUser ? null : new Error("incorrect email or password");
     done(error, matchingUser);
   })
-)
+);
 
 const app = express();
 
-app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'reallysecret',
+  resave: false,
+  saveUninitialized: true,
+}));
+app.use(passport.initialize());
+app.use(passport.session())
 
 const server = new ApolloServer({
   typeDefs,

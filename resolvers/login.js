@@ -3,7 +3,9 @@ const login = async (parent, { email, password }, context) => {
     email,
     password,
   });
+
   await context.login(user);
+
   return { user };
 };
 
