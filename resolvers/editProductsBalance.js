@@ -1,6 +1,13 @@
 const models = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
 
 const editProductsBalance = async (parent, { input }, context) => {
+  if (!context.isAuthenticated()) {
+    throw new AuthenticationError(
+      "You need to be logged in to perform this action"
+    );
+  }
+  
   const unfoundIds = [];
   const erroneousBalanceIds = [];
   const editedProducts = [];
