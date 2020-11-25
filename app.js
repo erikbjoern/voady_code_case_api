@@ -1,4 +1,5 @@
 const bodyParser = require("body-parser");
+const cors = require('cors')
 const express = require("express");
 const models = require("./models");
 const passport = require("passport");
@@ -35,11 +36,15 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session())
+app.use(cors())
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req, res }) => buildContext({ req, res })
+  context: ({ req, res }) => buildContext({ req, res }),
+  cors: {
+    origin: '*',
+  }
 })
 
 server.applyMiddleware({ app });
