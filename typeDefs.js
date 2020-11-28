@@ -2,16 +2,16 @@ const { gql } = require('apollo-server-express')
 
 const typeDefs = gql`
   input EditBalanceInput {
-    id: Int!
+    id: String!
     balance: Int!
   }
 
   input DeleteInput {
-    id: Int!
+    id: String!
   }
 
   input ProductInput {
-    id: Int!
+    id: String!
     name: String
     brand: String
     volume: Int
@@ -25,7 +25,7 @@ const typeDefs = gql`
   }
 
   type Product {
-    id: Int
+    id: String
     name: String
     brand: String
     volume: Int
@@ -35,7 +35,7 @@ const typeDefs = gql`
   }
 
   type ProductId {
-    id: Int
+    id: String
   }
 
   type User {
