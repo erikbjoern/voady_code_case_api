@@ -4,7 +4,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const deleteProducts = async (parent, { products }, context) => {
   if (!context.isAuthenticated()) {
     throw new AuthenticationError(
-      "You need to be logged in to perform this action"
+      "Du måste vara inloggad för att kunna utföra denna handlingen"
     );
   }
   

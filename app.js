@@ -24,7 +24,7 @@ passport.use(
     });
     const error = matchingUser
       ? null
-      : new Error("incorrect email or password");
+      : new Error("Fel email-adress eller lösenord");
     done(error, matchingUser);
   })
 );
