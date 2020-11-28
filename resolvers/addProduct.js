@@ -7,6 +7,9 @@ const addProduct = async (parent, { product }, context) => {
       "Du måste vara inloggad för att kunna utföra denna handlingen"
     );
   }
+  if (product.balance < 0) {
+    throw new Error("Lagersaldo kan inte vara mindre än 0.")
+  }
 
   try {
     const newProduct = await models.Product.create(product);
