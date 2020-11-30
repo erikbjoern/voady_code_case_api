@@ -8,6 +8,14 @@ const typeDefs = require("./typeDefs");
 const session = require("express-session");
 const { ApolloServer } = require("apollo-server-express");
 const { GraphQLLocalStrategy, buildContext } = require("graphql-passport");
+const { Pool } = require('pg');
+const PORT = process.env.PORT || 3000
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -53,6 +61,6 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: corsOptions });
 
-app.listen(3000, () =>
+app.listen(PORT, () =>
   console.log("Server listening on localhost:3000/graphql")
 );
