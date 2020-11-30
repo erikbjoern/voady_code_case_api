@@ -25,11 +25,11 @@ const deleteProducts = async (parent, { products }, context) => {
   
   if (unfoundProducts.length > 0) {
     const deletedConfirmation = deletedProducts.length > 0
-      ? ` All other products were successfully deleted.` 
+      ? ` Alla övriga markerade produkter blev borttagna.` 
       : ""
 
     throw new Error (
-      `Could not find product(s) with id ${unfoundProducts.join(", ")}.` + deletedConfirmation
+      `Kunde inte hitta produkt(er) med artikelnummer ${unfoundProducts.join(", ")}.` + deletedConfirmation
     )
   }
 

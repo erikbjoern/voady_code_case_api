@@ -32,14 +32,14 @@ const editProductsBalance = async (parent, { products }, context) => {
   
   if (unfoundIds.length > 0 || erroneousBalanceIds.length > 0) {
     const unfoundProducts = unfoundIds.length > 0 
-      ? `Couldn't find product(s) with id ${unfoundIds.join(", ")}.`
+      ? `Kunde inte hitta produkt(er) med artikelnummer ${unfoundIds.join(", ")}.`
       : ""
     const uneditedProducts = erroneousBalanceIds.length > 0 
-      ? `Product(s) with id ${erroneousBalanceIds.join(", ")} were not edited - balance can't go below 0.`
+      ? `Produkt(er) med artikelnummer ${erroneousBalanceIds.join(", ")} har inte ändrats - lagersaldo kan inte gå under 0.`
       : ""
     const confirmation = editedProducts.length > 0
-      ? "Following product(s) had their balance successfully updated: " + editedProducts.map(({ id, balance }) => (
-          `Id ${id}: ${balance} pcs.`
+      ? "Följande produkter har fått sina lagersaldon uppdaterade: " + editedProducts.map(({ id, balance }) => (
+          `Artikelnummer ${id}: ${balance}st.`
         )).join(" ")
       : ""
 
