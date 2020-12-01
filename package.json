@@ -1,4 +1,9 @@
 {
+  "name": "voady-code-case-api",
+  "engines": {
+    "node": "15.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "start": "node app.js"
   },
