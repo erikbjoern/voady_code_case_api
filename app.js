@@ -8,13 +8,14 @@ const typeDefs = require("./typeDefs");
 const session = require("express-session");
 const { ApolloServer } = require("apollo-server-express");
 const { GraphQLLocalStrategy, buildContext } = require("graphql-passport");
-const { Pool } = require('pg');
-const PORT = process.env.PORT || 3000
+const { Pool } = require("pg");
+const PORT = process.env.PORT || 3000;
+const ORIGIN = process.env.CLIENT_URL || "http://localhost";
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 passport.serializeUser(function (user, done) {
@@ -38,7 +39,7 @@ passport.use(
 );
 
 const app = express();
-const corsOptions = { origin: "https://voady-code-case.netlify.app/", credentials: true }
+const corsOptions = { origin: ORIGIN, credentials: true };
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -62,5 +63,5 @@ const server = new ApolloServer({
 server.applyMiddleware({ app, cors: corsOptions });
 
 app.listen(PORT, () =>
-  console.log("Server listening on localhost:3000/graphql")
+  console.log(`Server listening on localhost:${PORT}/graphql`)
 );
