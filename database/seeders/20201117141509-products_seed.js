@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Products', [
       {
-        id: 13452,
+        id: "style-lab-13452",
         name: "Style Lab Flex Hairspray",
         brand: "Living Proof",
         volume: 225,
@@ -15,7 +15,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 1230914,
+        id: "VIP-texture-1230914",
         name: "VIP Texturing Hair Spray",
         brand: "Kérastase",
         volume: 200,
@@ -26,7 +26,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 132342,
+        id: "1-800-hm-nc-132342",
         name: "1-800-Hold-Me No-Crunch Flexible Hold Hairspray",
         brand: "IGK",
         volume: 150,
