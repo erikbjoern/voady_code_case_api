@@ -38,7 +38,7 @@ passport.use(
 );
 
 const app = express();
-const corsOptions = { origin: "http://localhost:8080", credentials: true }
+const corsOptions = { origin: "https://voady-code-case.netlify.app/", credentials: true }
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
