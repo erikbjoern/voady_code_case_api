@@ -43,11 +43,16 @@ const corsOptions = { origin: ORIGIN, credentials: true };
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('trust proxy', 1)
 app.use(
   session({
     secret: "reallysecret",
-    resave: false,
     saveUninitialized: true,
+    resave: false,
+    cookie: {
+      sameSite: "none",
+      secure: true
+    },
   })
 );
 app.use(passport.initialize());
